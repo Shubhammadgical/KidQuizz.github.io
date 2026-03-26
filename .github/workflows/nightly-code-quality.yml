@@ -1,0 +1,20 @@
+name: Nightly Code Quality Sweep
+
+on:
+  schedule:
+    - cron: "0 2 * * *" # Runs every day at 2 AM IST
+
+jobs:
+  trigger-agent:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call Kilo Webhook
+        run: |
+          curl -X POST https://hooks.kilosessions.ai/inbound/user/864fb3c6-f407-4914-b1ff-11760acca0a0/nightly-code-quality-sweep \
+          -H "Content-Type: application/json" \
+          -d '{
+            "task": "code-quality-sweep",
+            "checks": ["lint-fix", "format", "unused-imports", "dead-code"],
+            "target_dirs": ["src/", "lib/"],
+            "base_branch": "main"
+          }'
