@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container } from "react-bootstrap";
 import http from "./httpService";
@@ -78,7 +78,7 @@ class KQQuestions extends Component {
       };
       const response = await http.post(`/newData`, newdata);
       console.log(response.status);
-    } catch (err) {
+    } catch (_err) {
       this.setState({ show: 3 });
       console.log(this.state.show);
       this.setState({ error: 1 });
