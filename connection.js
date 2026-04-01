@@ -88,42 +88,4 @@ function deletedata() {
   });
 }
 
-function truncate(req, res) {
-  client.query("TRUNCATE TABLE questions RESTART IDENTITY", (err, result) => {
-    if (!err) {
-      console.log("Deletion Success");
-      const { questions } = require("./newdata.js");
-      for (let i = 0; i < questions.length; i++) {
-        client.query(
-          "INSERT INTO questions(opt1,opt2,opt3,answer,image) VALUES ($1, $2, $3, $4, $5)",
-          [
-            questions[i].opt1,
-            questions[i].opt2,
-            questions[i].opt3,
-            questions[i].answer,
-            questions[i].image,
-          ],
-          (err, result) => {
-            if (err) {
-              console.log(err);
-              console.log("Error in inserting data");
-            } else {
-              console.log(result);
-            }
-          },
-        );
-      }
-    } else {
-      console.log(err.message);
-    }
-  });
-}
-
 module.exports = { getdata, insertdata, deletedata, updatedata, getplayersdata, insertplayerdata };
-//deletedata();
-//truncate();
-//getdata();
-//updatedata();
-//insertdata();
-//truncate();
-//getplayersdata();
