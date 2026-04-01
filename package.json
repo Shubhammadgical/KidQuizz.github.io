@@ -5,7 +5,11 @@
   "main": "connection.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "format": "prettier --write \"*.js\" \"*.jsx\"",
+    "format:check": "prettier --check \"*.js\" \"*.jsx\""
   },
   "keywords": [],
   "author": "",
