@@ -3,6 +3,9 @@ import eslintConfigPrettier from "eslint-config-prettier";
 
 export default [
   {
+    ignores: ["eslint.config.mjs", "node_modules/**", "package-lock.json"],
+  },
+  {
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: "commonjs",

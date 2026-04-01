@@ -36,7 +36,7 @@ function getplayersdata(req,res){
     })
 }
 function insertdata(req,res){
-    let {id,opt1,opt2,opt3,answer,image}=req.body;
+    const {id,opt1,opt2,opt3,answer,image}=req.body;
     client.query("INSERT INTO questions(id,opt1,opt2,opt3,answer,image) VALUES ($1, $2, $3, $4, $5, $6)",[id,opt1,opt2,opt3,answer,image],(err,result)=>{
     if(!err){
         console.log(result);
@@ -86,7 +86,7 @@ function truncate(req,res){
     client.query("TRUNCATE TABLE questions RESTART IDENTITY",(err,result)=>{
         if(!err){
             console.log("Deletion Success");
-            let {questions} = require("./newdata.js");
+            const {questions} = require("./newdata.js");
             for(let i=0;i<questions.length;i++){
                 client.query("INSERT INTO questions(opt1,opt2,opt3,answer,image) VALUES ($1, $2, $3, $4, $5)",
                     [questions[i].opt1,questions[i].opt2,questions[i].opt3,questions[i].answer,questions[i].image],(err,result)=>{

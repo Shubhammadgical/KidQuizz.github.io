@@ -1,4 +1,4 @@
-let questions= [
+const questions= [
   {opt1:"Elephant",opt2: "Dog",opt3: "Whale",answer: "Elephant",image:"https://i.ibb.co/sKRJj26/Elephant.jpg"},
   {opt1:"Cow",opt2:  "Goat",opt3: "Crocodile",answer: "Crocodile",image:"https://i.ibb.co/3cT7Bhy/croc.jpg"},
   {opt1:"Lion", opt2: "Giraffe", opt3:"Cow",answer: "Giraffe",image:"https://i.ibb.co/tcrNncc/giraffe.jpg"},

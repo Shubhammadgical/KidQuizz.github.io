@@ -1,5 +1,5 @@
-let express=require("express");
-let app = express();
+const express=require("express");
+const app = express();
 app.use(express.json());
 app.use(function(req,res,next){
     res.header("Access-Control-Allow-Origin","*");
@@ -13,10 +13,10 @@ app.use(function(req,res,next){
     );
         next();
 });
-var port = process.env.PORT || 2410;
+const port = process.env.PORT || 2410;
 app.listen(port, ()=> console.log(`Node app listening on port ${port}!`));
 
-let db=require("./connection.js");
+const db=require("./connection.js");
 
 app.get("/allPlayers",db.getplayersdata);
 
