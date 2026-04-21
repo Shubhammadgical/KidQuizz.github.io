@@ -43,3 +43,33 @@ Tooling added: ESLint 9.x with flat config (`eslint.config.mjs`)
 - **No revert required.** All changes pass ESLint (0 errors, 1 expected warning for intentionally unused `_err` catch param) and syntax validation.
 - **Observation:** `updatedata` and `deletedata` functions in `connection.js` are exported but never called in `server.js`. They are not removed since they are exported (potential external consumers), but they may be candidates for removal in a future cleanup if confirmed unused.
 - **Security note:** `connection.js` contains hardcoded database credentials. This was not addressed as part of this sweep (out of scope for lint/format/dead-code cleanup).
+
+---
+
+## Subsequent Sweep: 2026-04-21
+
+**Branch:** `session/agent_a4b39204-6d69-48bd-bbde-9dad6d39864e`
+**Base:** `main`
+
+### Summary
+
+| Category          | Changes | Files Affected |
+| ----------------- | ------- | -------------- |
+| Lint auto-fix     | 0 fixes | 0 files        |
+| Code formatting   | 0 files | 0 files        |
+| Unused imports    | 0 fixes | 0 files        |
+| Dead code removal | 0 lines | 0 files        |
+
+### Results
+
+- **Lint:** Ran `eslint --fix .` — 0 errors, 1 expected warning for `_err` (intentional unused catch parameter with `_` prefix). No fixes applied.
+- **Format:** Ran `prettier --write` — all 5 files already conform to `.prettierrc` (0 changes).
+- **Unused imports:** All imports are actively used. No unused imports detected.
+- **Dead code:** No unexported functions with zero call sites. No unreachable branches. No commented-out code blocks. All previously removed in 2026-04-01 sweep.
+- **Syntax validation:** All CommonJS files pass `node --check`.
+- **No regressions.** No code changes required — codebase remains clean.
+
+### Notes
+
+- Target directories `src/` and `lib/` do not exist in this project. Sweep applied to all JavaScript/JSX files in project root.
+- Codebase was already in a pristine state from the 2026-04-01 quality sweep. No new issues detected.
