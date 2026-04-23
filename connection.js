@@ -69,23 +69,5 @@ function insertplayerdata(req, res) {
     },
   );
 }
-function updatedata() {
-  client.query("UPDATE questions SET answer=3 WHERE id=3", (err, result) => {
-    if (!err) {
-      console.log(result.rows);
-    } else {
-      console.log(err.message);
-    }
-  });
-}
-function deletedata() {
-  client.query("DELETE FROM questions WHERE id=3", (err, result) => {
-    if (!err) {
-      console.log(result.rows);
-    } else {
-      console.log(err.message);
-    }
-  });
-}
 
-module.exports = { getdata, insertdata, deletedata, updatedata, getplayersdata, insertplayerdata };
+module.exports = { getdata, insertdata, getplayersdata, insertplayerdata };
