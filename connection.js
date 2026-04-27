@@ -35,22 +35,6 @@ function getplayersdata(req, res) {
     }
   });
 }
-function insertdata(req, res) {
-  const { id, opt1, opt2, opt3, answer, image } = req.body;
-  client.query(
-    "INSERT INTO questions(id,opt1,opt2,opt3,answer,image) VALUES ($1, $2, $3, $4, $5, $6)",
-    [id, opt1, opt2, opt3, answer, image],
-    (err, result) => {
-      if (!err) {
-        console.log(result);
-        res.status(201).send(`Question added `);
-      } else {
-        console.log(err.message);
-        res.status(404).send("Error in inserting data");
-      }
-    },
-  );
-}
 
 function insertplayerdata(req, res) {
   const { name, errcount, date, time } = req.body;
@@ -69,23 +53,5 @@ function insertplayerdata(req, res) {
     },
   );
 }
-function updatedata() {
-  client.query("UPDATE questions SET answer=3 WHERE id=3", (err, result) => {
-    if (!err) {
-      console.log(result.rows);
-    } else {
-      console.log(err.message);
-    }
-  });
-}
-function deletedata() {
-  client.query("DELETE FROM questions WHERE id=3", (err, result) => {
-    if (!err) {
-      console.log(result.rows);
-    } else {
-      console.log(err.message);
-    }
-  });
-}
 
-module.exports = { getdata, insertdata, deletedata, updatedata, getplayersdata, insertplayerdata };
+module.exports = { getdata, getplayersdata, insertplayerdata };
