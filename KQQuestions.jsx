@@ -79,6 +79,7 @@ class KQQuestions extends Component {
       const response = await http.post(`/newData`, newdata);
       console.log(response.status);
     } catch (_err) {
+      console.log(_err);
       this.setState({ show: 3 });
       console.log(this.state.show);
       this.setState({ error: 1 });
