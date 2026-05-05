@@ -1,45 +1,47 @@
 # Code Quality Sweep Notes
 
-**Date:** 2026-04-01
-**Branch:** `chore/code-quality-sweep`
+**Date:** 2026-05-05
+**Branch:** `chore/code-quality-sweep-20260505`
 **Base:** `main`
 
 ## Summary
 
 | Category          | Changes             | Files Affected |
 | ----------------- | ------------------- | -------------- |
-| Lint auto-fix     | 31 fixes            | 5 files        |
-| Code formatting   | 4 files reformatted | 4 files        |
-| Unused imports    | 2 fixes             | 1 file         |
-| Dead code removal | 38 lines removed    | 1 file         |
+| Lint auto-fix     | 0 fixes             | 0 files        |
+| Code formatting   | 0 files reformatted | 0 files        |
+| Unused imports    | 0 fixes             | 0 files        |
+| Dead code removal | 0 lines removed     | 0 files        |
 
-## 1. Lint Auto-Fix (`style: auto-fix lint violations`)
+## Analysis
 
-- **22x `prefer-const`**: Changed `let` to `const` for variables that are never reassigned
-- **1x `no-var`**: Changed `var` to `const` in `server.js:16`
-- **8x `eqeqeq`**: Changed `==`/`!=` to `===`/`!==` in `KQQuestions.jsx` (some required manual fixes due to JSX context)
+### Target Directories
 
-Tooling added: ESLint 9.x with flat config (`eslint.config.mjs`)
+The specified target directories `src/` and `lib/` do not exist in this project. Source files are located in the project root directory.
 
-## 2. Code Formatting (`style: format code`)
+### Lint Check
 
-- 4 files reformatted with Prettier using project `.prettierrc` config
-- Files: `connection.js`, `httpService.js`, `newdata.js`, `server.js`
-- `KQQuestions.jsx` was already formatted from lint fixes
+ESLint reports 1 warning (expected):
 
-## 3. Unused Imports (`refactor: remove unused imports`)
+- `KQQuestions.jsx:81` - `'_err' is defined but never used` - This is intentional (catch parameter prefixed with `_` to indicate intentional unused variable).
 
-- Removed unused `React` default import from `KQQuestions.jsx:1` (only `Component` is used)
-- Prefixed unused catch parameter `err` → `_err` in `KQQuestions.jsx:81`
+No errors found.
 
-## 4. Dead Code Removal (`refactor: remove dead code`)
+### Code Formatting
 
-- **`truncate` function** in `connection.js` (lines 91-120): Unexported function with zero call sites. Not referenced in `module.exports` or any other file.
-- **Commented-out function calls** in `connection.js` (7 lines): Added in the initial commit (2022-03-07), over 4 years old. Included `//deletedata()`, `//truncate()`, `//getdata()`, `//updatedata()`, `//insertdata()`, `//truncate()`, `//getplayersdata()`.
+All files already conform to Prettier configuration. No formatting changes required.
+
+### Unused Imports
+
+No unused imports detected. The `_err` parameter warning is expected behavior.
+
+### Dead Code
+
+- `putApi` and `deleteApi` in `httpService.js` are exported but not called internally. These are kept as they are exported and may be used by external consumers.
+- `updatedata` and `deletedata` in `connection.js` are also exported but not used - previously documented and left in place.
 
 ## Notes
 
-- **No test suite exists.** The project has no test files (`*.test.*`, `*.spec.*`, `test/`, `__tests__/`). Syntax validation was performed via `node --check` on CommonJS files and ESLint parsing on all files. No syntax errors detected.
-- **No revert required.** All changes pass ESLint (0 errors, 1 expected warning for intentionally unused `_err` catch param) and syntax validation.
-- **Observation:** `updatedata` and `deletedata` functions in `connection.js` are exported but never called in `server.js`. They are not removed since they are exported (potential external consumers), but they may be candidates for removal in a future cleanup if confirmed unused.
-- **Security note:** `connection.js` contains hardcoded database credentials. This was not addressed as part of this sweep (out of scope for lint/format/dead-code cleanup).
+- **No test suite exists.** The project has no test files (`*.test.*`, `*.spec.*`, `test/`, `__tests__/`).
+- **No changes required.** All code already passes quality checks from the previous sweep on 2026-04-01.
+- **Security note:** `connection.js` contains hardcoded database credentials. This remains out of scope for this sweep.
