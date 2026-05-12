@@ -1,19 +1,52 @@
 # Code Quality Sweep Notes
 
-**Date:** 2026-04-01
-**Branch:** `chore/code-quality-sweep`
+**Date:** 2026-05-12
+**Branch:** `session/agent_899fa991-415d-46d1-bfb7-76a5d4bde6e8`
 **Base:** `main`
 
 ## Summary
 
-| Category          | Changes             | Files Affected |
-| ----------------- | ------------------- | -------------- |
-| Lint auto-fix     | 31 fixes            | 5 files        |
-| Code formatting   | 4 files reformatted | 4 files        |
-| Unused imports    | 2 fixes             | 1 file         |
-| Dead code removal | 38 lines removed    | 1 file         |
+| Category          | Changes | Files Affected |
+| ----------------- | ------- | -------------- |
+| Lint auto-fix     | 0 fixes | 0              |
+| Code formatting   | 0 files | 0              |
+| Unused imports    | 0 fixes | 0              |
+| Dead code removal | 0 lines | 0              |
 
-## 1. Lint Auto-Fix (`style: auto-fix lint violations`)
+### Previous Sweep Summary
+
+See completed sweep below from 2026-05-09 / 2026-05-07.
+
+### 2026-05-12 Sweep Details
+
+#### 1. Lint Auto-Fix (`style: auto-fix lint violations`)
+
+- No auto-fixable violations found. ESLint reports 0 errors, 1 intentional warning for `_err` catch parameter in `KQQuestions.jsx:81`.
+
+#### 2. Code Formatting (`style: format code`)
+
+- All files already conform to Prettier configuration. No formatting changes applied.
+
+#### 3. Unused Imports (`refactor: remove unused imports`)
+
+- No unused imports detected. All imports are actively used.
+
+#### 4. Dead Code Removal (`refactor: remove dead code`)
+
+- No unexported functions with zero call sites identified.
+- No unreachable code branches found.
+- No commented-out code blocks older than 30 days found.
+- Note: `insertdata`, `updatedata`, and `deletedata` in `connection.js` are exported but unused internally; excluded from removal as they are exported (potential external consumers).
+
+#### 5. Test Suite
+
+- No test suite exists. Project contains no `*.test.*`, `*.spec.*`, `test/`, or `__tests__/` directories. Syntax validation performed via ESLint (0 errors).
+
+---
+
+## Historical Sweep Records
+
+## 1. 2026-05-09 Sweep Summary
 
 - **22x `prefer-const`**: Changed `let` to `const` for variables that are never reassigned
 - **1x `no-var`**: Changed `var` to `const` in `server.js:16`
